@@ -8,11 +8,11 @@ class Scraper
 
   end
 
-  def self.scrape_calendar(region)
+  def scrape_calendar(region)
     dates = []
     #replace address with argument
     calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
-    #iterate over rows
+    #iterate over weeks
     calendar.css('table.em-calendar tbody tr').each do |row|
       #iterate over days
       row.css('td.eventful a').each do |day|
@@ -21,7 +21,7 @@ class Scraper
     end
   end
 
-  def self.scrape_region
+  def scrape_region
 #Hard code this instead. Regions won't change. have cli list regions and use if/else statement to link to chosen region, then start scraping.
     regions = []
     home_page = Nokogiri::HTML(open("http://hpdejunkie.com/"))
