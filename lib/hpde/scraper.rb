@@ -5,20 +5,37 @@ require 'pry'
 class Scraper
 
   def initialize
-
-  end
-
-  def scrape_calendar(region)
-    dates = []
+    schedule = []
     #replace address with argument
     calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
     #iterate over weeks
-    calendar.css('table.em-calendar tbody tr').each do |row|
+    calendar.css('table.em-calendar tbody tr').each do |week|
       #iterate over days
-      row.css('td.eventful a').each do |day|
-        dates << day.text
+      week.css('td.eventful a').each do |day|
+        #adds date integer to dates array
+        day_number = day.text
+        link = day.attr('href')
+        schedule << {day_number => link}
       end
     end
+    binding.pry
+  end
+
+  def scrape_calendar(region)
+    schedule = {}
+    #replace address with argument
+    calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
+    #iterate over weeks
+    calendar.css('table.em-calendar tbody tr').each do |week|
+      #iterate over days
+      week.css('td.eventful a').each do |day|
+        #adds date integer to dates array
+        day_number = day.text
+        link = day.attr('href')
+        schedule << {day_number.to_s => link}
+      end
+    end
+
   end
 
   def scrape_region
