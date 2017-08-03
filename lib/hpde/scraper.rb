@@ -22,7 +22,7 @@ class Scraper
   end
 
   def scrape_calendar(region)
-    schedule = {}
+    schedule = []
     #replace address with argument
     calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
     #iterate over weeks
@@ -32,7 +32,7 @@ class Scraper
         #adds date integer to dates array
         day_number = day.text
         link = day.attr('href')
-        schedule << {day_number.to_s => link}
+        schedule << {day_number => link}
       end
     end
 
