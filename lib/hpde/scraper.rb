@@ -21,7 +21,11 @@ class Scraper
     binding.pry
   end
 
-  def scrape_calendar(region)
+  def scrape_day
+
+  end
+
+  def scrape_month(region)
     schedule = []
     #replace address with argument
     calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
