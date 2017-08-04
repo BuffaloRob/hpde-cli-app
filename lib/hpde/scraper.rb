@@ -6,19 +6,15 @@ class Scraper
 
   def initialize
     events = []
-    sponsors = []
-    tracks = []
     #TODO:replace hard code address with argument
     day = Nokogiri::HTML(open("http://hpdejunkie.com/events/2017-08-05/?category=48"))
-    # binding.pry
-    day.css('table.events-table tbody').each do |event|
-      # binding.pry
-      #iterate over seperate track events
-      #How do you seperate this from the 'td' that has the dates?
-      sponsors << event.css('tr td table tr td a').text
-      tracks << event.css('tr td table tr td i').text
-
+    #iterate over seperate track events
+    day.css('table.events-table tbody tr td table tr').each do |event|
+      sponsors = event.css('a').text
+      tracks = event.css('i').text
+      events << {sponsors => tracks}
     end
+    events.uniq
     binding.pry
   end
 #to set key(the date) equal to the track(s) with HPDE's for that day (and not just the link)
@@ -32,13 +28,13 @@ class Scraper
     events = []
     #TODO:replace hard code address with argument
     day = Nokogiri::HTML(open("http://hpdejunkie.com/events/2017-08-05/?category=48"))
-    day.css('table.events-table tbody').each do |event|
-      #iterate over seperate track events
-      #How do you seperate this from the 'td' that has the dates?
-      sponsor = event.css('tr td table tbody tr td a').text
-      track = event.css('tr td table tbody tr td i').text
-      binding.pry
+    #iterate over seperate track events
+    day.css('table.events-table tbody tr td table tr').each do |event|
+      sponsors = event.css('a').text
+      tracks = event.css('i').text
+      events << {sponsors => tracks}
     end
+    events.uniq
   end
 
   def scrape_month(region_url)
