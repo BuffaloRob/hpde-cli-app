@@ -1,5 +1,5 @@
 1) What I want it to do
-  - from hpdejunkie.com select your region
+  - extract from hpdejunkie.com, select your region
   - add month selection if possible
   - list all of the days that have hpde events. next to the days list tracks hosting events.
   - select a day and list sponsors and what track they're on
