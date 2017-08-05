@@ -11,18 +11,14 @@ class Scraper
     @schedule = []
     @events = []
 
-    calendar_month = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
-    #iterate over weeks
-    calendar_month.css('table.em-calendar tbody tr').each do |week|
-      #iterate over days
-      week.css('td.eventful a').each do |day|
-        #sets day_number = date of event
-        day_number = day.text
-        #sets link for that date
-        link = day.attr('href')
-        self.schedule << {day_number => link}
-      end
+    day = Nokogiri::HTML(open("http://hpdejunkie.com/events/2017-08-05/?category=48"))
+    #iterate over seperate track events
+    day.css('table.events-table tbody tr td table tr').each do |event|
+      sponsors = event.css('a').text
+      tracks = event.css('i').text
+      events << {sponsor: sponsors, track: tracks}
     end
+    events.uniq
     binding.pry
   end
 #to set key(the date) equal to the track(s) with HPDE's for that day (and not just the link)
@@ -43,7 +39,7 @@ class Scraper
     day.css('table.events-table tbody tr td table tr').each do |event|
       sponsors = event.css('a').text
       tracks = event.css('i').text
-      events << {sponsors => tracks}
+      events << {sponsor: sponsors, track: tracks}
     end
     events.uniq
   end
@@ -60,7 +56,7 @@ class Scraper
         day_number = day.text
         #sets link for that date
         link = day.attr('href')
-        @schedule << {day_number => link}
+        self.schedule << {date: day_number, link: link}
       end
     end
 
