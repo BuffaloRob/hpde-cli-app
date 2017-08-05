@@ -3,18 +3,26 @@ require 'nokogiri'
 require 'pry'
 
 class Scraper
+  attr_accessor :schedule, :events
+
+
 
   def initialize
-    events = []
-    #TODO:replace hard code address with argument
-    day = Nokogiri::HTML(open("http://hpdejunkie.com/events/2017-08-05/?category=48"))
-    #iterate over seperate track events
-    day.css('table.events-table tbody tr td table tr').each do |event|
-      sponsors = event.css('a').text
-      tracks = event.css('i').text
-      events << {sponsors => tracks}
+    @schedule = []
+    @events = []
+
+    calendar_month = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
+    #iterate over weeks
+    calendar_month.css('table.em-calendar tbody tr').each do |week|
+      #iterate over days
+      week.css('td.eventful a').each do |day|
+        #sets day_number = date of event
+        day_number = day.text
+        #sets link for that date
+        link = day.attr('href')
+        self.schedule << {day_number => link}
+      end
     end
-    events.uniq
     binding.pry
   end
 #to set key(the date) equal to the track(s) with HPDE's for that day (and not just the link)
@@ -23,9 +31,12 @@ class Scraper
   # schedule.each do |day|
   #   scraped_day = scrape_day(Nokogiri::HTML(open(day_value)))
   #
+  def month_with_tracks
+
+  end
 
   def scrape_day(day_url)
-    events = []
+    #events = []
     #TODO:replace hard code address with argument
     day = Nokogiri::HTML(open("http://hpdejunkie.com/events/2017-08-05/?category=48"))
     #iterate over seperate track events
@@ -38,8 +49,8 @@ class Scraper
   end
 
   def scrape_month(region_url)
-    schedule = []
     #TODO:replace hard code address with argument
+    #schedule = []
     calendar_month = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
@@ -49,7 +60,7 @@ class Scraper
         day_number = day.text
         #sets link for that date
         link = day.attr('href')
-        schedule << {day_number => link}
+        @schedule << {day_number => link}
       end
     end
 
