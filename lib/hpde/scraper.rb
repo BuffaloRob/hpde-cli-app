@@ -45,7 +45,7 @@ class Scraper
       #iterate over days
       week.css('td.eventful a').each do |day|
         #sets day_number = date of event
-        day_str = day.text
+        day_number = day.text
         #sets link for that date
         link = day.attr('href')
         self.date_with_link << {day_number => link}
