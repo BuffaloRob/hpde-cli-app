@@ -18,17 +18,14 @@ class Scraper
       #pushes sponsor=>track to days_events array as an array of hashes for each day
       day.each_value{|link| self.days_events << scrape_day(link)}
 
-      day.each_pair
+      dagy.each_pair
     end
     self.days_events.each do |event|
       event.each_value
   end
-#to set key(the date) equal to the track(s) with HPDE's for that day (and not just the link)
-#iterate over schedule, for each |day| (day = the hash for a single day)
-#run Nokogiri on the link with the scrape_day method.
-  # schedule.each do |day|
-  #   days_events = scrape_day(Nokogiri::HTML(open(day_value)))
-  #
+
+
+ # use merge, run scraped_day in the block to replace the old value with the new scraped_day return value
   def month_with_tracks
     self.schedule.each do |day|
       #in each hash run scrape_day(day_url) passing in the link(value) of each hash as the arg
