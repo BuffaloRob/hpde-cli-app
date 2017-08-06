@@ -3,21 +3,25 @@ require 'nokogiri'
 require 'pry'
 
 class Scraper
-  attr_accessor :schedule, :events
+  attr_accessor :schedule, :days_events
 
 
 
   def initialize
     @schedule = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
     @days_events = []
+    # = [[{"Apex Driving Events"=>"Lime Rock Park, Lakeville CT"}], [{"Hooked on Driving"=>"VIR, Alton VA"}, {"Rezoom Motorsports"=>"Barber Motorsports Park, Leeds AL"}]]
 #########################################################################
     #iterate over each hash in the array @schedule
-    schedule.each do |day|
+    self.schedule.each do |day|
       #in each hash run scrape_day(day_url) passing in the link(value) of each hash as the arg
-      day.each_value{|link| @days_events << scrape_day(link)}
-      binding.pry
+      #pushes sponsor=>track to days_events array as an array of hashes for each day
+      day.each_value{|link| self.days_events << scrape_day(link)}
+
+      day.each_pair
     end
-      # binding.pry
+    self.days_events.each do |event|
+      event.each_value
   end
 #to set key(the date) equal to the track(s) with HPDE's for that day (and not just the link)
 #iterate over schedule, for each |day| (day = the hash for a single day)
@@ -26,10 +30,9 @@ class Scraper
   #   days_events = scrape_day(Nokogiri::HTML(open(day_value)))
   #
   def month_with_tracks
-    schedule.each do |day|
-      days_events = []
-      days_events << scrape_day("#{day[:link]}")
-      binding.pry
+    self.schedule.each do |day|
+      #in each hash run scrape_day(day_url) passing in the link(value) of each hash as the arg
+      day.each_value{|link| self.days_events << scrape_day(link)}
     end
   end
 
