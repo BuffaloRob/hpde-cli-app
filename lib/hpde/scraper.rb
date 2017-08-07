@@ -8,15 +8,26 @@ class Scraper
 
 
   def initialize
-    @date_with_link = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
-    @date_with_track_and_sponsor = []
+    # @date_with_link = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
+
+    @date_with_track_and_sponsor = [{"3"=> [{:sponsor=>"Apex Driving Events", :track=>"Lime Rock Park, Lakeville CT"}]}, {"6"=> [{:sponsor=>"Hooked on Driving", :track=>"VIR, Alton VA"}, {:sponsor=>"Rezoom Motorsports", :track=>"Barber Motorsports Park, Leeds AL"}]}]
 
 #########################################################################
+  self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
+    date_sponsor_track_hash.each do |date, sponsor_track_arr|
+      sponsor_track_arr.each {|key, value| puts value}
+
+    end
+  end
+
+  end
+
+  def month_with_track
 
   end
 
 
-  def month_with_tracks
+  def month_with_track_and_sponsor
     #iterate over each hash in the array @date_with_link
     self.date_with_link.each do |day_hash|
       #changes the value(link) of the date_with_link hashes to a hash of sponsors and tracks by running scrape_day on the link.
