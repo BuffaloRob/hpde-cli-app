@@ -5,7 +5,7 @@ require 'pry'
 class Scraper
   attr_accessor :date_with_link, :date_with_track_and_sponsor
 
-
+#TODO: 1) set-up proper test environment
 
   def initialize
     # @date_with_link = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
@@ -14,16 +14,26 @@ class Scraper
 
 #########################################################################
   self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
-    date_sponsor_track_hash.each do |date, sponsor_track_arr|
-      sponsor_track_arr.each {|key, value| puts value}
-
+    date_sponsor_track_hash.each do |date, sponsor_track_array|
+      sponsor_track_array.each do |key|
+        puts "#{date} - #{key[:track]}"
+      end
     end
   end
 
   end
 
   def month_with_track
-
+    #iterate over each 'date' hash in date_with_track_and_sponsor
+    self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
+      #iterate over each array of hash(es) acting as the key in date_with_track_and_sponsor
+      date_sponsor_track_hash.each do |date, sponsor_track_array|
+        #iterate over each :track key
+        sponsor_track_array.each do |key|
+          puts "#{date} - #{key[:track]}"
+        end
+      end
+    end
   end
 
 
