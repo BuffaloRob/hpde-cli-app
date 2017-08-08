@@ -2,12 +2,13 @@ require 'open-uri'
 require 'nokogiri'
 require 'pry'
 
-class Scraper
+class Hpde::Scraper
   attr_accessor :date_with_link, :date_with_track_and_sponsor
 
 #TODO: 1) set-up proper test environment
 
   def initialize(region_url)
+    binding.pry
     @date_with_link = []
     @date_with_track_and_sponsor = []
     scrape_month(region_url)
