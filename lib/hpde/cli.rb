@@ -2,6 +2,7 @@ class Hpde::CLI
 
   def call
     select_region
+    select_day
   end
 
   def select_region
@@ -11,13 +12,32 @@ class Hpde::CLI
       2. Mountain
       3. Central
       4. East
-      HEREDOC
-    #add if/else to select link to specified region
+    HEREDOC
+
+    input = gets.strip
+    case input
+    when "1"
+      Scraper.initialize("http://hpdejunkie.com/pacific/")
+    when "2"
+      Scraper.initialize("http://hpdejunkie.com/mountain/")
+    when "3"
+      Scraper.initialize("http://hpdejunkie.com/central/")
+    when "4"
+      Scraper.initialize("http://hpdejunkie.com/east/")
+    else
+      puts "That's not one of the choices"
+    end
   end
 
-  def select_month
-    puts "Select the month number you would like to see:"
-    #add way to link to various months
+  # def select_month
+  #   puts "Select the month number you would like to see:"
+  #   #add way to link to various months
+  # end
+
+  def select_day
+    puts "Type in the number of the day you would like to view in more detail:"
+    input = gets.strip
+
   end
 
   def view_month_with_track

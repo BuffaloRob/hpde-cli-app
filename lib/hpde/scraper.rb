@@ -7,20 +7,11 @@ class Scraper
 
 #TODO: 1) set-up proper test environment
 
-  def initialize
-    @date_with_link = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
-
-    @date_with_track_and_sponsor = [{"3"=> [{:sponsor=>"Apex Driving Events", :track=>"Lime Rock Park, Lakeville CT"}]}, {"6"=> [{:sponsor=>"Hooked on Driving", :track=>"VIR, Alton VA"}, {:sponsor=>"Rezoom Motorsports", :track=>"Barber Motorsports Park, Leeds AL"}]}]
-
-#########################################################################
-  self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
-    date_sponsor_track_hash.each do |date, sponsor_track_array|
-      sponsor_track_array.each do |key|
-        puts "#{date} - #{key[:track]}"
-      end
-    end
-  end
-
+  def initialize(region_url)
+    @date_with_link = []
+    @date_with_track_and_sponsor = []
+    scrape_month(region_url)
+    month_with_track
   end
 
   def month_with_track
@@ -57,10 +48,10 @@ class Scraper
     events.uniq
   end
 
-  def scrape_month#(region_url)
+  def scrape_month(region_url)
     #TODO:replace hard code address with argument
     #date_with_link = []
-    calendar_month = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
+    calendar_month = Nokogiri::HTML(open(region_url))
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
       #iterate over days
