@@ -17,7 +17,7 @@ class Hpde::CLI
     input = gets.strip
     case input
     when "1"
-      Scraper.initialize("http://hpdejunkie.com/pacific/")
+      Hpde::Scraper.new("http://hpdejunkie.com/pacific/")
     when "2"
       Scraper.initialize("http://hpdejunkie.com/mountain/")
     when "3"
@@ -35,7 +35,7 @@ class Hpde::CLI
   # end
 
   def select_day
-    puts "Type in the number of the day you would like to view in more detail:"
+    puts "Type in the number of the day you would like to view in more detail or type in the name of the track to view all events at that venue:"
     input = gets.strip
 
   end
