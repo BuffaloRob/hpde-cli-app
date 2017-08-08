@@ -1,3 +1,4 @@
+
 class Hpde::CLI
 
   def call
@@ -19,11 +20,11 @@ class Hpde::CLI
     when "1"
       Hpde::Scraper.new("http://hpdejunkie.com/pacific/")
     when "2"
-      Scraper.initialize("http://hpdejunkie.com/mountain/")
+      Hpde::Scraper.new("http://hpdejunkie.com/mountain/")
     when "3"
-      Scraper.initialize("http://hpdejunkie.com/central/")
+      Hpde::Scraper.new("http://hpdejunkie.com/central/")
     when "4"
-      Scraper.initialize("http://hpdejunkie.com/east/")
+      Hpde::Scraper.new("http://hpdejunkie.com/east/")
     else
       puts "That's not one of the choices"
     end

@@ -8,14 +8,16 @@ class Hpde::Scraper
 #TODO: 1) set-up proper test environment
 
   def initialize(region_url)
-    binding.pry
+    # binding.pry
     @date_with_link = []
     @date_with_track_and_sponsor = []
     scrape_month(region_url)
+    month_with_track_and_sponsor
     month_with_track
   end
 
   def month_with_track
+
     #iterate over each 'date' hash in date_with_track_and_sponsor
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       #iterate over each array of hash(es) acting as the key in date_with_track_and_sponsor
@@ -32,7 +34,7 @@ class Hpde::Scraper
   def month_with_track_and_sponsor
     #iterate over each hash in the array @date_with_link
     self.date_with_link.each do |day_hash|
-      #changes the value(link) of the date_with_link hashes to a hash of sponsors and tracks by running scrape_day on the link.
+      #changes the value(s) of the date_with_link hashes to a hash of sponsors and tracks by running scrape_day on the link.
       @date_with_track_and_sponsor << day_hash.each {|date, link| day_hash[date] = scrape_day(link)}
     end
   end
@@ -50,7 +52,6 @@ class Hpde::Scraper
   end
 
   def scrape_month(region_url)
-    #TODO:replace hard code address with argument
     #date_with_link = []
     calendar_month = Nokogiri::HTML(open(region_url))
     #iterate over weeks
@@ -66,7 +67,6 @@ class Hpde::Scraper
     end
   end
 
-  scraper = Scraper.new
 
 end
 

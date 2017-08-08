@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require "bundler/setup"
 require './lib/hpde'
 
 Hpde::CLI.new.call
