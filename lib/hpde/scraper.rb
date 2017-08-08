@@ -8,7 +8,7 @@ class Scraper
 #TODO: 1) set-up proper test environment
 
   def initialize
-    # @date_with_link = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
+    @date_with_link = [{"3"=>"http://hpdejunkie.com/events/2017-08-03/?category=48"}, {"6"=>"http://hpdejunkie.com/events/2017-08-06/?category=48"}, {"7"=>"http://hpdejunkie.com/events/2017-08-07/?category=48"}]
 
     @date_with_track_and_sponsor = [{"3"=> [{:sponsor=>"Apex Driving Events", :track=>"Lime Rock Park, Lakeville CT"}]}, {"6"=> [{:sponsor=>"Hooked on Driving", :track=>"VIR, Alton VA"}, {:sponsor=>"Rezoom Motorsports", :track=>"Barber Motorsports Park, Leeds AL"}]}]
 
