@@ -1,6 +1,6 @@
 
 class Hpde::CLI
-
+  attr_accessor :mountain, :chosen_region
   def call
     select_region
     select_day
@@ -21,13 +21,13 @@ class Hpde::CLI
     puts "***************************************************************************"
     case input
     when "1"
-      Hpde::Scraper.new("http://hpdejunkie.com/pacific/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/pacific/")
     when "2"
-      Hpde::Scraper.new("http://hpdejunkie.com/mountain/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/mountain/")
     when "3"
-      Hpde::Scraper.new("http://hpdejunkie.com/central/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/central/")
     when "4"
-      Hpde::Scraper.new("http://hpdejunkie.com/east/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/east/")
     else
       puts ""
       puts "That's not one of the choices, try again"
@@ -45,11 +45,12 @@ class Hpde::CLI
   def select_day
     puts ""
     puts ""
-    puts "Type in the number of the day you would like to view in more detail or type in the name of the track to view all events at that venue:"
+    puts "Type in the number of the day you would like to view in more detail:"
     puts ""
     input = gets.strip
     puts ""
-    Hpde::Scraper.pull_day_info(input)
+    self.chosen_region.pull_day_info(input)
+    #call on instance of scraper that it's using
   end
 
   def view_month_with_track
