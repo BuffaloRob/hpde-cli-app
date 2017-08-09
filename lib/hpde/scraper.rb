@@ -15,9 +15,20 @@ class Hpde::Scraper
     month_with_track
   end
 
-  def pull_day_info(chosen_day)
-    self.date_with_track_and_sponsor.each do |hash|
-      puts hash.values_at(chosen_day)
+  def day_input_valid?(chosen_day)
+
+  end
+
+  def day_detailed_info(chosen_day)
+    self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
+      if date_sponsor_track_hash.key?(chosen_day)
+        date_sponsor_track_hash.each do |date, sponsor_track_array|
+          sponsor_track_array.each do |key|
+            puts  "Event sponsored by #{key[:sponsor]} at #{key[:track]}"
+            puts ""
+          end
+        end
+      end
     end
   end
 
@@ -43,6 +54,7 @@ class Hpde::Scraper
   end
 
   def scrape_day(day_url)
+    #TODO: currently doesn't scrape any event occurring today"
     day = Nokogiri::HTML(open(day_url))
     events = []
     #iterate over seperate track events
