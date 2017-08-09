@@ -17,7 +17,7 @@ class Hpde::CLI
     puts ""
     input = gets.strip
     puts ""
-    puts "Please be patient, it will take a little while to grab all the information"
+    puts "Please be patient, it may take a little while to grab all the information"
     puts "***************************************************************************"
     case input
     when "1"
@@ -29,9 +29,12 @@ class Hpde::CLI
     when "4"
       Hpde::Scraper.new("http://hpdejunkie.com/east/")
     else
-      puts "That's not one of the choices"
+      puts ""
+      puts "That's not one of the choices, try again"
+      puts ""
+      select_region
     end
-
+    puts "***************************************************************************"
   end
 
   # def select_month
@@ -43,8 +46,9 @@ class Hpde::CLI
     puts ""
     puts ""
     puts "Type in the number of the day you would like to view in more detail or type in the name of the track to view all events at that venue:"
-
+    puts ""
     input = gets.strip
+    puts ""
     Hpde::Scraper.pull_day_info(input)
   end
 
