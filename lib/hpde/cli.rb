@@ -16,6 +16,9 @@ class Hpde::CLI
     HEREDOC
 
     input = gets.strip
+
+    puts "Please be patient, it will take a little while to grab all the information"
+    puts "***************************************************************************"
     case input
     when "1"
       Hpde::Scraper.new("http://hpdejunkie.com/pacific/")
@@ -28,6 +31,7 @@ class Hpde::CLI
     else
       puts "That's not one of the choices"
     end
+
   end
 
   # def select_month
@@ -36,6 +40,8 @@ class Hpde::CLI
   # end
 
   def select_day
+    puts ""
+    puts ""
     puts "Type in the number of the day you would like to view in more detail or type in the name of the track to view all events at that venue:"
     input = gets.strip
 
