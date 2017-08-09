@@ -14,9 +14,9 @@ class Hpde::CLI
       3. Central
       4. East
     HEREDOC
-
+    puts ""
     input = gets.strip
-
+    puts ""
     puts "Please be patient, it will take a little while to grab all the information"
     puts "***************************************************************************"
     case input
@@ -45,7 +45,7 @@ class Hpde::CLI
     puts "Type in the number of the day you would like to view in more detail or type in the name of the track to view all events at that venue:"
 
     input = gets.strip
-    Hpde:Scraper.pull_day_info(input)
+    Hpde::Scraper.pull_day_info(input)
   end
 
   def view_month_with_track

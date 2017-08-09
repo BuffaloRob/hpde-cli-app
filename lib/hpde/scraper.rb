@@ -5,19 +5,22 @@ require 'pry'
 class Hpde::Scraper
   attr_accessor :date_with_link, :date_with_track_and_sponsor
 
-#TODO: 1) set-up proper test environment
 
   def initialize(region_url)
-    # binding.pry
     @date_with_link = []
     @date_with_track_and_sponsor = []
+  #   [{"5"=>[{:sponsor=>"NASA HPDE", :track=>"Utah Motorsports Campus, Tooele UT"}]}]
     scrape_month(region_url)
     month_with_track_and_sponsor
     month_with_track
   end
 
-  def month_with_track
+  def pull_day_info(chosen_day)
+    self.date_with_track_and_sponsor.values_at(chosen_day)
 
+  end
+
+  def month_with_track
     #iterate over each 'date' hash in date_with_track_and_sponsor
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       #iterate over each array of hash(es) acting as the key in date_with_track_and_sponsor
@@ -67,19 +70,4 @@ class Hpde::Scraper
     end
   end
 
-
 end
-
-#   def scrape_region
-# #Hard code this instead. Regions won't change. have cli list regions and use if/else statement to link to chosen region, then start scraping.
-#     regions = []
-#     home_page = Nokogiri::HTML(open("http://hpdejunkie.com/"))
-#     home_page.css('div.columns.three').each do |choose_region|
-#       choose_region.css('.button.btn-red').each do |map|
-#         regions << map.css('.map-text').text
-#       end
-#     end
-#     # puts "Choose your region"
-#     # puts "#{regions.each_with_index}"
-#     # region_choice = gets.strip
-#   end
