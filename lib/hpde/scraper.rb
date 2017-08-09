@@ -16,8 +16,9 @@ class Hpde::Scraper
   end
 
   def pull_day_info(chosen_day)
-    self.date_with_track_and_sponsor.values_at(chosen_day)
-
+    self.date_with_track_and_sponsor.each do |hash|
+      puts hash.values_at(chosen_day)
+    end
   end
 
   def month_with_track
@@ -32,7 +33,6 @@ class Hpde::Scraper
       end
     end
   end
-
 
   def month_with_track_and_sponsor
     #iterate over each hash in the array @date_with_link
