@@ -49,7 +49,7 @@ class Hpde::CLI
     puts ""
     input = gets.strip
     puts ""
-    self.chosen_region.pull_day_info(input)
+    self.chosen_region.day_detailed_info(input)
     #call on instance of scraper that it's using
   end
 
