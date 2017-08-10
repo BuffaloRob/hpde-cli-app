@@ -15,6 +15,7 @@ class Hpde::Scraper
   end
 
   def day_input_valid?(chosen_day)
+    #similar to month_with_track
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       date_sponsor_track_hash.each do |date, sponsor_track_array|
         date == chosen_day
@@ -23,11 +24,13 @@ class Hpde::Scraper
   end
 
   def day_detailed_info(chosen_day)
+    #similar to month_with_track
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       if date_sponsor_track_hash.key?(chosen_day)
         date_sponsor_track_hash.each do |date, sponsor_track_array|
           sponsor_track_array.each do |key|
-            puts  "Event sponsored by #{key[:sponsor]} at #{key[:track]}"
+            puts "Day of Month: #{date}"
+            puts "#{key[:sponsor]} will be sponsoring a High Performance Driving Event at #{key[:track]}"
             puts ""
           end
         end
