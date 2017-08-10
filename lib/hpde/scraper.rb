@@ -51,6 +51,8 @@ class Hpde::Scraper
           track_1 = Track.new(key[:track])
           sponsor = Sponsor.new()
           day = Day.new(date)
+          new_event = Event.new(track_1, sponsor, day)
+
         end
       end
     end
