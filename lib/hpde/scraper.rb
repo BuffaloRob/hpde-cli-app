@@ -22,6 +22,7 @@ class Hpde::Scraper
     end
   end
 
+  #TODO:Change to use reference to objects, not scraped info. This can be done to all methods that get called after month_with_track
   def day_detailed_info(chosen_day)
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       if date_sponsor_track_hash.key?(chosen_day)
@@ -48,10 +49,10 @@ class Hpde::Scraper
         #iterate over each :track key
         sponsor_track_array.each do |key|
           puts "#{date} - #{key[:track]}"
-          track_1 = Track.new(key[:track])
-          sponsor = Sponsor.new()
+          track = Track.new(key[:track])
+          sponsor = Sponsor.new()#TODO:figure out what to pass in here
           day = Day.new(date)
-          new_event = Event.new(track_1, sponsor, day)
+          new_event = Event.new(track, sponsor, day)
 
         end
       end
