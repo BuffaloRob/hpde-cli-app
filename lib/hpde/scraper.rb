@@ -9,14 +9,17 @@ class Hpde::Scraper
   def initialize(region_url)
     @date_with_link = []
     @date_with_track_and_sponsor = []
-  #   [{"5"=>[{:sponsor=>"NASA HPDE", :track=>"Utah Motorsports Campus, Tooele UT"}]}]
     scrape_month(region_url)
     month_with_track_and_sponsor
     month_with_track
   end
 
   def day_input_valid?(chosen_day)
-
+    self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
+      date_sponsor_track_hash.each do |date, sponsor_track_array|
+        date == chosen_day
+      end
+    end
   end
 
   def day_detailed_info(chosen_day)
