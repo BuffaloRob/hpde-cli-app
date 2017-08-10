@@ -1,9 +1,11 @@
 
 class Hpde::CLI
-  attr_accessor :mountain, :chosen_region
+  attr_accessor :chosen_region
   def call
     select_region
+        puts "***************************************************************************"
     select_day
+        puts "***************************************************************************"
   end
 
   def select_region
@@ -34,7 +36,6 @@ class Hpde::CLI
       puts ""
       select_region
     end
-    puts "***************************************************************************"
   end
 
   # def select_month
@@ -49,8 +50,14 @@ class Hpde::CLI
     puts ""
     input = gets.strip
     puts ""
-    self.chosen_region.day_detailed_info(input)
-    #call on instance of scraper that it's using
+    if self.chosen_region.day_input_valid?(input)
+      binding.pry
+      self.chosen_region.day_detailed_info(input)
+    else
+      binding.pry
+      puts "That date is invalid"
+      select_day
+    end
   end
 
   def view_month_with_track
