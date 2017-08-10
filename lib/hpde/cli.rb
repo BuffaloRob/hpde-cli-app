@@ -1,11 +1,12 @@
 
 class Hpde::CLI
   attr_accessor :chosen_region
+
   def call
     select_region
-        puts "***************************************************************************"
+    puts "***************************************************************************"
     select_day
-        puts "***************************************************************************"
+    puts "***************************************************************************"
   end
 
   def select_region
@@ -32,7 +33,7 @@ class Hpde::CLI
       self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/east/")
     else
       puts ""
-      puts "That's not one of the choices, try again"
+      puts "I'm just looking for you to type in a number between 1 and 4, don't overthink this one"
       puts ""
       select_region
     end
@@ -51,10 +52,10 @@ class Hpde::CLI
     input = gets.strip
     puts ""
     if self.chosen_region.day_input_valid?(input)
-      binding.pry
+      # binding.pry
       self.chosen_region.day_detailed_info(input)
     else
-      binding.pry
+      # binding.pry
       puts "That date is invalid"
       select_day
     end
