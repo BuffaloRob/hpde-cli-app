@@ -35,6 +35,11 @@ class Hpde::Scraper
     end
   end
 
+  def select_month(region_url)
+    calendar_month = Nokogiri::HTML(open(region_url))
+
+  end
+
   def month_with_track
     #iterate over each 'date' hash in date_with_track_and_sponsor
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
@@ -43,6 +48,9 @@ class Hpde::Scraper
         #iterate over each :track key
         sponsor_track_array.each do |key|
           puts "#{date} - #{key[:track]}"
+          track_1 = Track.new(key[:track])
+          sponsor = Sponsor.new()
+          day = Day.new(date)
         end
       end
     end
@@ -70,7 +78,6 @@ class Hpde::Scraper
   end
 
   def scrape_month(region_url)
-    #date_with_link = []
     calendar_month = Nokogiri::HTML(open(region_url))
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|

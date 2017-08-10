@@ -51,10 +51,10 @@ class Hpde::CLI
     input = gets.strip
     puts ""
     if self.chosen_region.day_input_valid?(input)
-      binding.pry
+      # binding.pry
       self.chosen_region.day_detailed_info(input)
     else
-      binding.pry
+      # binding.pry
       puts "That date is invalid"
       select_day
     end
