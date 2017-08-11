@@ -46,14 +46,14 @@ class Hpde::Scraper
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       #iterate over each array of hash(es) acting as the key in date_with_track_and_sponsor
       date_sponsor_track_hash.each do |date, sponsor_track_array|
-        #iterate over each :track key
+        #iterate over each :track & :sponsor key. Make new objects
         sponsor_track_array.each do |key|
           puts "#{date} - #{key[:track]}"
-          track = Track.new(key[:track])
-          sponsor = Sponsor.new()#TODO:figure out what to pass in here
-          day = Day.new(date)
-          new_event = Event.new(track, sponsor, day)
-
+          track = Hpde::Track.new(key[:track])
+          sponsor = Hpde::Sponsor.new(key[:sponsor])
+          day = Hpde::Day.new(date)
+          new_event = Hpde::Event.new(track, sponsor, day)
+          binding.pry
         end
       end
     end

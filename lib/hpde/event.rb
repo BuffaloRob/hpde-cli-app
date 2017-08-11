@@ -11,3 +11,4 @@ class Hpde::Event #relates the sponsor, track and day together
   end
 
 end
+ 
