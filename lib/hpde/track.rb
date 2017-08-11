@@ -1,5 +1,5 @@
 class Hpde::Track
-  attr_accessor :name, :sponsors, :days, :location, :event
+  attr_accessor :name, :sponsor, :day, :location, :event
 
   # Track.name = "Road Atlanta"
   # Track.sponsors = ["Hooked on Driving", "NASA HPDE"]

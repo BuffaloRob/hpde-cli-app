@@ -56,7 +56,6 @@ class Hpde::Scraper
           sponsor = Hpde::Sponsor.new(key[:sponsor])
           day = Hpde::Day.new(date)
           new_event = Hpde::Event.new(track, sponsor, day)
-          binding.pry
         end
       end
     end

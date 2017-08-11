@@ -1,5 +1,5 @@
 class Hpde::Sponsor
-  attr_accessor :name, :tracks, :days, :event
+  attr_accessor :name, :track, :day, :event
 
   # Sponsor.name = "Hooked on Driving"
   # Sponsor.url = "https://www.hookedondriving.com/category.cfm?category=1&region=0"
@@ -8,14 +8,6 @@ class Hpde::Sponsor
   @@all = []
   def initialize(name = nil)
     @name = name
-
-  end
-
-  def tracks
-
-  end
-
-  def days
 
   end
 
