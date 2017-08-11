@@ -23,6 +23,7 @@ class Hpde::Scraper
     end
   end
 
+  #TODO:Change to use reference to objects, not scraped info. This can be done to all methods that get called after month_with_track
   def day_detailed_info(chosen_day)
     #similar to month_with_track
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
@@ -38,14 +39,24 @@ class Hpde::Scraper
     end
   end
 
+  def select_month(region_url)
+    calendar_month = Nokogiri::HTML(open(region_url))
+
+  end
+
   def month_with_track
     #iterate over each 'date' hash in date_with_track_and_sponsor
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
       #iterate over each array of hash(es) acting as the key in date_with_track_and_sponsor
       date_sponsor_track_hash.each do |date, sponsor_track_array|
-        #iterate over each :track key
+        #iterate over each :track & :sponsor key. Make new objects
         sponsor_track_array.each do |key|
           puts "#{date} - #{key[:track]}"
+          track = Hpde::Track.new(key[:track])
+          sponsor = Hpde::Sponsor.new(key[:sponsor])
+          day = Hpde::Day.new(date)
+          new_event = Hpde::Event.new(track, sponsor, day)
+          binding.pry
         end
       end
     end
@@ -73,7 +84,6 @@ class Hpde::Scraper
   end
 
   def scrape_month(region_url)
-    #date_with_link = []
     calendar_month = Nokogiri::HTML(open(region_url))
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
