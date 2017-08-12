@@ -1,15 +1,11 @@
 class Hpde::Track
   attr_accessor :name, :sponsor, :day, :location, :event
-
-  # Track.name = "Road Atlanta"
-  # Track.sponsors = ["Hooked on Driving", "NASA HPDE"]
-  # Track.dates = ["19", "20", "27"]
+  attr_reader :sponsors, :days
 
   @@all = []
   def initialize(name = nil, location = nil)
+    #TODO: add location
     @name = name
-    @location = location
-
   end
 
 end

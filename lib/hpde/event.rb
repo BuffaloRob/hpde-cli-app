@@ -1,36 +1,87 @@
-class Hpde::Event #relates the sponsor, track and day together
+ class Hpde::Event #relates the sponsor, track and day together
 
   attr_accessor :track, :sponsor, :day
+  attr_reader :tracks, :sponsors, :days
 
   @@all = []
+  @@day = []
 
   def initialize(track = nil, sponsor = nil, day = nil)
     @track = track
     @sponsor = sponsor
     @day = day
     @track.event = self
-    @track.sponsor = sponsor
-    @track.day = day
     @day.event = self
-    @day.sponsor = sponsor
-    @day.track = track
     @sponsor.event = self
-    @sponsor.day = day
-    @sponsor.track = track
     @@all << self
+    # @track.sponsor = sponsor
+    # @track.day = day
+    # @day.sponsor = sponsor
+    # @day.track = track
+    # @sponsor.day = day
+    # @sponsor.track = track
+    # @tracks = []
+    # @sponsors = []
+    # @days = []
+    # @tracks << track
+    # @sponsors << sponsor
+    # @days << day
   end
 
   def self.all
     @@all
   end
 
-  def self.reset
+  def self.day
+    @@day
+  end
+
+  def self.all_reset
     @@all.clear
   end
 
-  ### Do I even need this?
-  def self.find(input)
-    self.all[input-1] #try [input.to_i-1] if it doesn't work initially
+  def self.day_reset
+    @@day.clear
   end
+
+  def self.select_day(day)
+    self.all.map do |date|
+      if date.day.name == day
+        @@day << date
+      end
+    end
+  end
+
+  def self.list_detailed_day
+    self.day.each do |attr|
+      day = attr.day.name
+      track = attr.track.name
+      sponsor = attr.sponsor.name
+      puts "Day of the Month: #{day}"
+      puts "#{sponsor} will be sponsoring a High Performance Driving Event at #{track}"
+      puts ""
+      # self.day_reset
+    end
+
+  end
+
+  def self.select_day_name
+    self.day.each do |attr|
+      attr.day.name
+    end
+  end
+
+  def self.select_sponsor_name
+    self.day.each do |attr|
+      attr.sponsor.name
+    end
+  end
+
+  def self.select_track_name
+    self.day.each do |attr|
+      attr.track.name
+    end
+  end
+
 
 end

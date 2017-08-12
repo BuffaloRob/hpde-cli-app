@@ -29,6 +29,13 @@ Here are the dates in #{month} that have HPDE's scheduled and the tracks where t
 08/11/2017 - 08/12/2017 -- Chin track days -- Road Atlanta, Braselton GA
 08/19/2017 - 08/20/2017 -- NASA HPDE -- VIR, Alton VA
 ------------------------------------------------------
+OOP:
+1) tracks have many days and sponsors
+2) day has many tracks and sponsors
+3) sponsor has many days and tracks
+
+
+------------------------------------------------------
 TODO:
 1) add object orientation by allowing to type in the track name to get a list of all events happening at that track
 ------------------------------------------------------

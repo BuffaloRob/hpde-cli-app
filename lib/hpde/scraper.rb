@@ -5,7 +5,6 @@ require 'pry'
 class Hpde::Scraper
   attr_accessor :date_with_link, :date_with_track_and_sponsor
 
-
   def initialize(region_url)
     @date_with_link = []
     @date_with_track_and_sponsor = []
@@ -23,20 +22,24 @@ class Hpde::Scraper
     end
   end
 
-  #TODO:Change to use reference to objects, not scraped info. This can be done to all methods that get called after month_with_track
-  def day_detailed_info(chosen_day)
-    #similar to month_with_track
-    self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
-      if date_sponsor_track_hash.key?(chosen_day)
-        date_sponsor_track_hash.each do |date, sponsor_track_array|
-          sponsor_track_array.each do |key|
-            puts "Day of Month: #{date}"
-            puts "#{key[:sponsor]} will be sponsoring a High Performance Driving Event at #{key[:track]}"
-            puts ""
-          end
-        end
-      end
-    end
+  # def day_detailed_info(chosen_day)
+  #   #similar to month_with_track
+  #   self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
+  #     if date_sponsor_track_hash.key?(chosen_day)
+  #       date_sponsor_track_hash.each do |date, sponsor_track_array|
+  #         sponsor_track_array.each do |key|
+  #           puts "Day of Month: #{date}"
+  #           puts "#{key[:sponsor]} will be sponsoring a High Performance Driving Event at #{key[:track]}"
+  #           puts ""
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
+
+  def self.day_detailed_info(day)
+    Hpde::Event.select_day(day)
+    Hpde::Event.list_detailed_day
   end
 
   def select_month(region_url)
@@ -44,6 +47,7 @@ class Hpde::Scraper
 
   end
 
+  #TODO:Change to use reference to objects, not scraped info. This can be done to all methods that get called after month_with_track/above here
   def month_with_track
     #iterate over each 'date' hash in date_with_track_and_sponsor
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
@@ -55,7 +59,7 @@ class Hpde::Scraper
           track = Hpde::Track.new(key[:track])
           sponsor = Hpde::Sponsor.new(key[:sponsor])
           day = Hpde::Day.new(date)
-          new_event = Hpde::Event.new(track, sponsor, day)
+          event = Hpde::Event.new(track, sponsor, day)
         end
       end
     end

@@ -1,13 +1,20 @@
 class Hpde::Sponsor
   attr_accessor :name, :track, :day, :event
+  attr_reader :tracks, :days
 
   # Sponsor.name = "Hooked on Driving"
   # Sponsor.url = "https://www.hookedondriving.com/category.cfm?category=1&region=0"
-  # Sponsor.tracks = ["New Jersey Motorsports Park", "Road Atlanta"]
-  # Sponsor.dates = ["12","13","19","20"]
-  @@all = []
-  def initialize(name = nil)
+
+
+  def initialize(name)
     @name = name
+    # @tracks = []
+    # @sponsors =[]
+    # day.sponsor = self
+    # track.sponsor = self
+    # @tracks << track
+    # @days << day
+
 
   end
 
