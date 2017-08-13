@@ -20,7 +20,7 @@ class Hpde::Scraper
   end
 
   def self.day_detailed_info(chosen_day)
-    Hpde::Event.select_day(chosen_day)
+    # Hpde::Event.select_day is already being called during validation. If you call again here it causes a double print
     Hpde::Event.list_detailed_day
   end
 
