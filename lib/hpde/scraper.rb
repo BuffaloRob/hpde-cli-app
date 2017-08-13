@@ -13,14 +13,14 @@ class Hpde::Scraper
     month_with_track
   end
 
-  def day_input_valid?(chosen_day)
-    #similar to month_with_track
-    self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
-      date_sponsor_track_hash.each do |date, sponsor_track_array|
-        date == chosen_day
-      end
-    end
-  end
+  # def day_input_valid?(chosen_day)
+  #   #similar to month_with_track
+  #   self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
+  #     date_sponsor_track_hash.each do |date, sponsor_track_array|
+  #       date == chosen_day
+  #     end
+  #   end
+  # end
 
   # def day_detailed_info(chosen_day)
   #   #similar to month_with_track
@@ -37,8 +37,14 @@ class Hpde::Scraper
   #   end
   # end
 
-  def self.day_detailed_info(day)
-    Hpde::Event.select_day(day)
+  def self.day_input_valid?(chosen_day)
+    Hpde::Event.select_day(chosen_day)
+    check_day = Hpde::Event.select_day_name
+    check_day.join == chosen_day
+  end
+
+  def self.day_detailed_info(chosen_day)
+    Hpde::Event.select_day(chosen_day)
     Hpde::Event.list_detailed_day
   end
 
