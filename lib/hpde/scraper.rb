@@ -15,8 +15,8 @@ class Hpde::Scraper
 
   def self.day_input_valid?(chosen_day)
     Hpde::Event.select_day(chosen_day)
-    check_day = Hpde::Event.select_day_name.uniq
-    check_day.join == chosen_day
+    check_day = Hpde::Event.select_day_name.first
+    check_day == chosen_day
   end
 
   def self.day_detailed_info(chosen_day)
