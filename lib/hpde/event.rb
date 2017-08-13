@@ -1,7 +1,6 @@
  class Hpde::Event #relates the sponsor, track and day together
 
   attr_accessor :track, :sponsor, :day
-  attr_reader :tracks, :sponsors, :days
 
   @@all = []
   @@day = []
@@ -20,12 +19,6 @@
     # @day.track = track
     # @sponsor.day = day
     # @sponsor.track = track
-    # @tracks = []
-    # @sponsors = []
-    # @days = []
-    # @tracks << track
-    # @sponsors << sponsor
-    # @days << day
   end
 
   def self.all
@@ -81,6 +74,5 @@
       attr.track.name
     end
   end
-
 
 end

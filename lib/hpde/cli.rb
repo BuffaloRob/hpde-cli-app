@@ -53,7 +53,7 @@ class Hpde::CLI
     puts ""
     puts ""
     if Hpde::Scraper.day_input_valid?(input)
-      Hpde::Scraper.day_detailed_info(input)
+      Hpde::Scraper.day_detailed_info
     else
       puts "That date is invalid"
       select_day
