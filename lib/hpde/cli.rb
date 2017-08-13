@@ -52,14 +52,12 @@ class Hpde::CLI
     input = gets.strip
     puts ""
     puts ""
-    # binding.pry
-    Hpde::Scraper.day_detailed_info(input)
-    # if self.chosen_region.day_input_valid?(input)
-    #   self.chosen_region.day_detailed_info(input)
-    # else
-    #   puts "That date is invalid"
-    #   select_day
-    # end
+    if Hpde::Scraper.day_input_valid?(input)
+      Hpde::Scraper.day_detailed_info(input)
+    else
+      puts "That date is invalid"
+      select_day
+    end
   end
 
   def view_month_with_track
