@@ -13,33 +13,9 @@ class Hpde::Scraper
     month_with_track
   end
 
-  # def day_input_valid?(chosen_day)
-  #   #similar to month_with_track
-  #   self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
-  #     date_sponsor_track_hash.each do |date, sponsor_track_array|
-  #       date == chosen_day
-  #     end
-  #   end
-  # end
-
-  # def day_detailed_info(chosen_day)
-  #   #similar to month_with_track
-  #   self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
-  #     if date_sponsor_track_hash.key?(chosen_day)
-  #       date_sponsor_track_hash.each do |date, sponsor_track_array|
-  #         sponsor_track_array.each do |key|
-  #           puts "Day of Month: #{date}"
-  #           puts "#{key[:sponsor]} will be sponsoring a High Performance Driving Event at #{key[:track]}"
-  #           puts ""
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
-
   def self.day_input_valid?(chosen_day)
     Hpde::Event.select_day(chosen_day)
-    check_day = Hpde::Event.select_day_name
+    check_day = Hpde::Event.select_day_name.uniq
     check_day.join == chosen_day
   end
 
@@ -48,12 +24,11 @@ class Hpde::Scraper
     Hpde::Event.list_detailed_day
   end
 
-  def select_month(region_url)
-    calendar_month = Nokogiri::HTML(open(region_url))
+  # def select_month(region_url)
+  #   calendar_month = Nokogiri::HTML(open(region_url))
+  #
+  # end
 
-  end
-
-  #TODO:Change to use reference to objects, not scraped info. This can be done to all methods that get called after month_with_track/above here
   def month_with_track
     #iterate over each 'date' hash in date_with_track_and_sponsor
     self.date_with_track_and_sponsor.each do |date_sponsor_track_hash|
