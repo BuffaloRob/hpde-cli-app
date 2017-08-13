@@ -60,13 +60,12 @@
       puts "Day of the Month: #{day}"
       puts "#{sponsor} will be sponsoring a High Performance Driving Event at #{track}"
       puts ""
-      # self.day_reset
     end
 
   end
 
   def self.select_day_name
-    self.day.each do |attr|
+    self.day.collect do |attr|
       attr.day.name
     end
   end
