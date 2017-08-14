@@ -13,6 +13,7 @@ class Hpde::Scraper
     month_with_track
   end
 
+
   def self.day_input_valid?(chosen_day)
     Hpde::Event.select_day(chosen_day)
     check_day = Hpde::Event.select_day_name.first
@@ -20,13 +21,15 @@ class Hpde::Scraper
   end
 
   def self.day_detailed_info
-    # Hpde::Event.select_day(chosen_day) is already being called on day_input_valid? If you call again here it causes a double print
+    # Hpde::Event.select_day(chosen_day) is already being called on day_input_valid? in the cli class, If you call again here it causes a double print
     Hpde::Event.list_detailed_day
   end
 
   # def select_month(region_url)
+  #   binding.pry
   #   calendar_month = Nokogiri::HTML(open(region_url))
-  #
+  #   binding.pry
+  #   calendar_month.css('')
   # end
 
   def month_with_track
