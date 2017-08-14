@@ -3,16 +3,15 @@ require 'nokogiri'
 require 'pry'
 
 class Test
-  attr_accessor :date_with_link, :date_with_track_and_sponsor, :month_with_link
+  attr_accessor :date_with_link, :date_with_track_and_sponsor
 
 
-  def initialize
+  def initialize(region_url, month)
     @date_with_link = []
     @date_with_track_and_sponsor = []
-    @month_with_link = []
-    select_month("http://hpdejunkie.com/pacific/", "September")
-
-
+    select_month(region_url, month)
+    month_with_track_and_sponsor
+    month_with_track
   end
 
   def select_month(region_url, month)
@@ -31,10 +30,8 @@ class Test
     end
 
     calendar_month = Nokogiri::HTML(open(calendar_link))
-    # binding.pry
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
-      # binding.pry
       #need to figure out escape sequence, if there aren't any events for that month then it needs to return a message stating that
       #iterate over days
       week.css('td.eventful a').each do |day|
@@ -44,34 +41,9 @@ class Test
         #sets link for that date
         link = day.attr('href')
         self.date_with_link << {day_number => link}
-        binding.pry
-      end
-    end
-
-        # end
-      # end
-    # end
-  end
-
-  def scrape_month
-    calendar_month = Nokogiri::HTML(open(@month_link))
-
-    #iterate over weeks
-    calendar_month.css('table.em-calendar tbody tr').each do |week|
-
-      #iterate over days
-      week.css('td.eventful a').each do |day|
-        #sets day_number = date of event
-        day_number = day.text
-        #sets link for that date
-        link = day.attr('href')
-        self.date_with_link << {day_number => link}
-        binding.pry
       end
     end
   end
+
 end
-Test.new
-
-#  //*[@id="events-date-dropdown"]/option[5]
-# events-date-dropdown > option:nth-child(10)
+# Test.new
