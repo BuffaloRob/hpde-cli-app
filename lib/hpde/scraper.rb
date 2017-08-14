@@ -87,10 +87,11 @@ class Hpde::Scraper
     calendar_month = Nokogiri::HTML(open(calendar_link))
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
-      #need to figure out escape sequence, if there aren't any events for that month then it needs to return a message stating that
+      #TODO:need to figure out escape sequence, if there aren't any events for that month then it needs to return a message stating that
       #iterate over days
+      binding.pry
       week.css('td.eventful a').each do |day|
-        # binding.pry
+        binding.pry
         #sets day_number = date of event
         day_number = day.text
         #sets link for that date
