@@ -9,28 +9,63 @@ class Hpde::CLI
     puts "***************************************************************************"
   end
 
+  def month_number_converter(month_number)
+    case month_number
+    when "1"
+      "January"
+    when "2"
+      "February"
+    when "3"
+      "March"
+    when "4"
+      "April"
+    when "5"
+      "May"
+    when "6"
+      "June"
+    when "7"
+      "July"
+    when "8"
+      "August"
+    when "9"
+      "September"
+    when "10"
+      "October"
+    when "11"
+      "November"
+    when "12"
+      "December"
+    else
+      "There's only 12 months, try again"
+      # month_number_converter(month_number)
+    end
+  end
+
   def select_region
     puts "Type the number of the region you would like to view:"
-    puts <<~HEREDOC
+    puts <<~RUBY
       1. Pacific
       2. Mountain
       3. Central
       4. East
-    HEREDOC
+    RUBY
     puts ""
     input = gets.strip
     puts ""
+    puts "Now enter the Month (as a number) that you would like to see:"
+    month_number = gets.strip
+    month = month_number_converter(month_number)
     puts "Please be patient, it may take a little while to grab all the information"
     puts "***************************************************************************"
     case input
     when "1"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/pacific/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/pacific/", month)
     when "2"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/mountain/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/mountain/", month)
     when "3"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/central/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/central/", month)
     when "4"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/east/")
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/east/", month)
     else
       puts ""
       puts "I'm just looking for you to type in a number between 1 and 4, don't overthink this one"
