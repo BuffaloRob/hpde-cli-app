@@ -1,8 +1,6 @@
 # Hpde
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hpde`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the High Performance Driving Event scraper. I love the site hpdejunkie.com but in order to find an event close enough to actually attend I needed to click on every single day on their calendar. This scraper takes care of that problem by listing the days that have events and the tracks they're located on. From there you can choose a specific day to see who is running the event.
 
 ## Installation
 
@@ -22,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1) Type the number of the corresponding region you would like to view.
+2) Type the numerical representation of the month you want to check out.
+3) Type the day number that you would like to view in more detail.
 
 ## Development
 
