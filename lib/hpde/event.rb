@@ -13,12 +13,6 @@
     @day.event = self
     @sponsor.event = self
     @@all << self
-    # @track.sponsor = sponsor
-    # @track.day = day
-    # @day.sponsor = sponsor
-    # @day.track = track
-    # @sponsor.day = day
-    # @sponsor.track = track
   end
 
   def self.all
@@ -63,16 +57,16 @@
     end
   end
 
-  def self.select_sponsor_name
-    self.day.each do |attr|
-      attr.sponsor.name
-    end
-  end
-
-  def self.select_track_name
-    self.day.each do |attr|
-      attr.track.name
-    end
-  end
+  # def self.select_sponsor_name
+  #   self.day.each do |attr|
+  #     attr.sponsor.name
+  #   end
+  # end
+  #
+  # def self.select_track_name
+  #   self.day.each do |attr|
+  #     attr.track.name
+  #   end
+  # end
 
 end

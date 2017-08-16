@@ -8,7 +8,6 @@ class Hpde::Scraper
   def initialize(region_url, month)
     @date_with_link = []
     @date_with_track_and_sponsor = []
-
     selected_month = select_month(region_url, month)
     if selected_month == false
       @empty_month = true
@@ -97,8 +96,9 @@ class Hpde::Scraper
     end
     #if counter never runs we know nothing is scheduled
     if counter < 1
-      puts "Nothing scheduled for this month"
-      return false
+      puts ""
+      puts "Nothing is scheduled for this month"
+      false
     end
   end
 

@@ -6,7 +6,7 @@ class Hpde::CLI
     select_region
     puts "***************************************************************************"
     select_day
-    puts "***************************************************************************"
+    goodbye
   end
 
   def select_region
@@ -19,11 +19,11 @@ class Hpde::CLI
       ***************************************************************************
     RUBY
 
-    puts ""
     input = gets.strip
-    puts ""
+    puts "***************************************************************************"
     puts "Now enter the Month (as a number) that you would like to see:"
     month_number = gets.strip
+    puts "***************************************************************************"
     month = month_number_converter(month_number)
     puts ""
     puts "Please be patient, it may take a little while to grab all the information"
@@ -48,22 +48,25 @@ class Hpde::CLI
   end
 
   def select_day
-
     if self.chosen_region.empty_month != true
-      puts ""
-      puts ""
       puts "Type in the number of the day you would like to view in more detail:"
-      puts ""
+      puts "***************************************************************************"
       input = gets.strip
-      puts ""
+      puts "***************************************************************************"
       puts ""
       if Hpde::Scraper.day_input_valid?(input)
         Hpde::Scraper.day_detailed_info
       else
-        puts "That date is invalid"
+        puts "That date is invalid, please try again"
         select_day
       end
     end
+  end
+
+  def goodbye
+    puts ""
+    puts "Thanks for using and good luck at your next session"
+    puts "***************************************************************************"
   end
 
   def month_number_converter(month_number)
