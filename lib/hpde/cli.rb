@@ -43,8 +43,6 @@ class Hpde::CLI
       puts ""
       select_region
     end
-
-
   end
 
   def select_day
@@ -96,11 +94,10 @@ class Hpde::CLI
     when "12"
       "December"
     else
-      #TODO: make this work
-      "There's only 12 months, try again"
-      # month_number_converter(month_number)
+      puts "There's only 12 months, try again"
+      puts "***************************************************************************"
+      puts ""
+      select_region
     end
   end
-
-
 end

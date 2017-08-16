@@ -53,7 +53,6 @@ class Hpde::Scraper
   end
 
   def scrape_day(day_url)
-    #TODO: currently doesn't scrape any event occurring today"
     day = Nokogiri::HTML(open(day_url))
     events = []
     #iterate over seperate track events
@@ -77,7 +76,7 @@ class Hpde::Scraper
 
     month_with_link.each do |month_hash|
       selected_month_hash = month_hash.select {|month_name, link| month_name == month}
-        selected_month_hash.each_value{|link| calendar_link << link}
+      selected_month_hash.each_value{|link| calendar_link << link}
     end
 
     calendar_month = Nokogiri::HTML(open(calendar_link))

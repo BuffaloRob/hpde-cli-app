@@ -5,8 +5,4 @@ class Hpde::Day
     @name = name
   end
 
-  def self.find(chosen_day)
-    self.all[day.name == chosen_day]
-  end
-
 end
