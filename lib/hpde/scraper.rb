@@ -3,12 +3,16 @@ require 'nokogiri'
 require 'pry'
 
 class Hpde::Scraper
-  attr_accessor :date_with_link, :date_with_track_and_sponsor
+  attr_accessor :date_with_link, :date_with_track_and_sponsor, :empty_month
 
   def initialize(region_url, month)
     @date_with_link = []
     @date_with_track_and_sponsor = []
-    select_month(region_url, month)
+
+    selected_month = select_month(region_url, month)
+    if selected_month == false
+      @empty_month = true
+    end
     month_with_track_and_sponsor
     month_with_track
   end
@@ -23,13 +27,6 @@ class Hpde::Scraper
     # Hpde::Event.select_day(chosen_day) is already being called on day_input_valid? in the cli class, If you call again here it causes a double print
     Hpde::Event.list_detailed_day
   end
-
-  # def select_month(region_url)
-  #   binding.pry
-  #   calendar_month = Nokogiri::HTML(open(region_url))
-  #   binding.pry
-  #   calendar_month.css('')
-  # end
 
   def month_with_track
     #iterate over each 'date' hash in date_with_track_and_sponsor
@@ -85,19 +82,23 @@ class Hpde::Scraper
     end
 
     calendar_month = Nokogiri::HTML(open(calendar_link))
+    counter = 0
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
-      #TODO:need to figure out escape sequence, if there aren't any events for that month then it needs to return a message stating that
       #iterate over days
-      binding.pry
       week.css('td.eventful a').each do |day|
-        binding.pry
+        counter += 1
         #sets day_number = date of event
         day_number = day.text
         #sets link for that date
         link = day.attr('href')
         self.date_with_link << {day_number => link}
       end
+    end
+    #if counter never runs we know nothing is scheduled
+    if counter < 1
+      puts "Nothing scheduled for this month"
+      return false
     end
   end
 

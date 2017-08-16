@@ -6,12 +6,12 @@ class Test
   attr_accessor :date_with_link, :date_with_track_and_sponsor
 
 
-  def initialize(region_url, month)
+  def initialize
     @date_with_link = []
     @date_with_track_and_sponsor = []
-    select_month(region_url, month)
-    month_with_track_and_sponsor
-    month_with_track
+    select_month("http://hpdejunkie.com/east/", "August")
+    # month_with_track_and_sponsor
+    # month_with_track
   end
 
   def select_month(region_url, month)
@@ -32,18 +32,19 @@ class Test
     calendar_month = Nokogiri::HTML(open(calendar_link))
     #iterate over weeks
     calendar_month.css('table.em-calendar tbody tr').each do |week|
-      #need to figure out escape sequence, if there aren't any events for that month then it needs to return a message stating that
+      #TODO:need to figure out escape sequence, if there aren't any events for that month then it needs to return a message stating that
       #iterate over days
-      week.css('td.eventful a').each do |day|
-        # binding.pry
-        #sets day_number = date of event
-        day_number = day.text
-        #sets link for that date
-        link = day.attr('href')
-        self.date_with_link << {day_number => link}
-      end
+      # binding.pry
+        week.css('td.eventful a').each do |day|
+          # binding.pry
+          #sets day_number = date of event
+          day_number = day.text
+          #sets link for that date
+          link = day.attr('href')
+          self.date_with_link << {day_number => link}
+       end
     end
   end
 
 end
-# Test.new
+Test.new

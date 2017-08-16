@@ -9,6 +9,63 @@ class Hpde::CLI
     puts "***************************************************************************"
   end
 
+  def select_region
+    puts "Type the number of the region you would like to view:"
+    puts <<~RUBY
+      1. Pacific
+      2. Mountain
+      3. Central
+      4. East
+      ***************************************************************************
+    RUBY
+
+    puts ""
+    input = gets.strip
+    puts ""
+    puts "Now enter the Month (as a number) that you would like to see:"
+    month_number = gets.strip
+    month = month_number_converter(month_number)
+    puts ""
+    puts "Please be patient, it may take a little while to grab all the information"
+    puts "***************************************************************************"
+    case input
+    when "1"
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/pacific/", month)
+    when "2"
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/mountain/", month)
+    when "3"
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/central/", month)
+    when "4"
+      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/east/", month)
+    else
+      puts ""
+      puts "You must have hit a wrong key, give it another shot"
+      puts ""
+      select_region
+    end
+
+
+  end
+
+  def select_day
+
+    if self.chosen_region.empty_month != true
+      puts ""
+      puts ""
+      puts "Type in the number of the day you would like to view in more detail:"
+      puts ""
+      input = gets.strip
+      puts ""
+      puts ""
+      if Hpde::Scraper.day_input_valid?(input)
+        Hpde::Scraper.day_detailed_info
+      else
+        puts "That date is invalid"
+        select_day
+      end
+    end
+  end
+
   def month_number_converter(month_number)
     case month_number
     when "1"
@@ -42,55 +99,5 @@ class Hpde::CLI
     end
   end
 
-  def select_region
-    puts "Type the number of the region you would like to view:"
-    puts <<~RUBY
-      1. Pacific
-      2. Mountain
-      3. Central
-      4. East
-      ***************************************************************************
-    RUBY
-    puts ""
-    input = gets.strip
-    puts ""
-    puts "Now enter the Month (as a number) that you would like to see:"
-    month_number = gets.strip
-    month = month_number_converter(month_number)
-    puts ""
-    puts "Please be patient, it may take a little while to grab all the information"
-    puts "***************************************************************************"
-    case input
-    when "1"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/pacific/", month)
-    when "2"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/mountain/", month)
-    when "3"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/central/", month)
-    when "4"
-      self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/east/", month)
-    else
-      puts ""
-      puts "You must have hit a wrong key, give it another shot"
-      puts ""
-      select_region
-    end
-  end
-
-  def select_day
-    puts ""
-    puts ""
-    puts "Type in the number of the day you would like to view in more detail:"
-    puts ""
-    input = gets.strip
-    puts ""
-    puts ""
-    if Hpde::Scraper.day_input_valid?(input)
-      Hpde::Scraper.day_detailed_info
-    else
-      puts "That date is invalid"
-      select_day
-    end
-  end
 
 end
