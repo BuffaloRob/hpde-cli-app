@@ -19,16 +19,16 @@ class Hpde::CLI
       ***************************************************************************
     RUBY
 
-    input = gets.strip
+    region_input = gets.strip
     puts "***************************************************************************"
     puts "Now enter the Month (as a number) that you would like to see:"
-    month_number = gets.strip
+    month_input = gets.strip
     puts "***************************************************************************"
-    month = month_number_converter(month_number)
+    month = month_number_converter(month_input)
     puts ""
     puts "Please be patient, it may take a little while to grab all the information"
     puts "***************************************************************************"
-    case input
+    case region_input
     when "1"
       self.chosen_region = Hpde::Scraper.new("http://hpdejunkie.com/pacific/", month)
     when "2"
@@ -56,6 +56,8 @@ class Hpde::CLI
         Hpde::Scraper.day_detailed_info
       else
         puts "That date is invalid, please try again"
+        puts "***************************************************************************"
+        puts ""
         select_day
       end
     end
@@ -67,8 +69,8 @@ class Hpde::CLI
     puts "***************************************************************************"
   end
 
-  def month_number_converter(month_number)
-    case month_number
+  def month_number_converter(month_input)
+    case month_input
     when "1"
       "January"
     when "2"
