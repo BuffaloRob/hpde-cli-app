@@ -4,7 +4,15 @@ Welcome to the High Performance Driving Event scraper. I love the site hpdejunki
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone this repo
+
+While inside the repo's directory type bundle into the CLI and hit enter (if bundle isn't installed you will have to do that first)
+
+Then type this into the CLI and hit enter. This will start the program:
+```ruby
+    ./bin/hpde
+```
+<!-- Add this line to your application's Gemfile:
 
 ```ruby
 gem 'hpde'
@@ -16,13 +24,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hpde
+    $ gem install hpde -->
 
 ## Usage
 
-1) Type the number of the corresponding region you would like to view.
-2) Type the numerical representation of the month you want to check out.
-3) Type the day number that you would like to view in more detail.
+1) Type ./bin/hpde and hit enter to start the program
+2) Type the number of the corresponding region you would like to view.
+3) Type the numerical representation of the month you want to check out.
+4) Type the day number that you would like to view in more detail.
 
 ## Development
 
